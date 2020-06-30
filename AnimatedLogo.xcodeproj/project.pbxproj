@@ -21,7 +21,7 @@
 		93C604AE24ABEB0B0067140D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 93C604AD24ABEB0B0067140D /* README.md */; };
 		93C604B024ABEB120067140D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 93C604AF24ABEB120067140D /* LICENSE */; };
 		93C604B324ABEB7A0067140D /* AnimatedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C604B224ABEB7A0067140D /* AnimatedLogo.png */; };
-		93C604B524ABEB800067140D /* AnimatedLogo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 93C604B424ABEB800067140D /* AnimatedLogo.gif */; };
+		93C604B724ABF4160067140D /* AnimatedLogo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 93C604B624ABF4160067140D /* AnimatedLogo.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		93C604AD24ABEB0B0067140D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		93C604AF24ABEB120067140D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		93C604B224ABEB7A0067140D /* AnimatedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimatedLogo.png; sourceTree = "<group>"; };
-		93C604B424ABEB800067140D /* AnimatedLogo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AnimatedLogo.gif; sourceTree = "<group>"; };
+		93C604B624ABF4160067140D /* AnimatedLogo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AnimatedLogo.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +144,8 @@
 		93C604B124ABEB660067140D /* GitHub-Images */ = {
 			isa = PBXGroup;
 			children = (
-				93C604B424ABEB800067140D /* AnimatedLogo.gif */,
 				93C604B224ABEB7A0067140D /* AnimatedLogo.png */,
+				93C604B624ABF4160067140D /* AnimatedLogo.gif */,
 			);
 			path = "GitHub-Images";
 			sourceTree = "<group>";
@@ -208,7 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C604B524ABEB800067140D /* AnimatedLogo.gif in Resources */,
+				93C604B724ABF4160067140D /* AnimatedLogo.gif in Resources */,
 				93C604B024ABEB120067140D /* LICENSE in Resources */,
 				9397BB1A24A2AAAF008AB845 /* Logo.sks in Resources */,
 				9397BB0E24A2A8BF008AB845 /* LaunchScreen.storyboard in Resources */,
