@@ -16,4 +16,4 @@ SpriteKit, UIKit
 Marcy Vernon [@MarcyVernon](https://twitter.com/MarcyVernon)
 
 **License:** \
-"Dark Mode Colors" is under the MIT license. See [LICENSE](/LICENSE) for more information.
+"Animated Logo" is under the MIT license. See [LICENSE](/LICENSE) for more information.
