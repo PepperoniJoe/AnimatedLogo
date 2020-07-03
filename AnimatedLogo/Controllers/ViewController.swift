@@ -45,7 +45,7 @@ class ViewController: UIViewController {
 
 extension ViewController: EndOfAnimation {
     func splash(isAnimationReady: Bool) {
-        buttonRepeat.isHidden = !isAnimationReady
+        buttonRepeat.isHidden =  !isAnimationReady
     }
     
     

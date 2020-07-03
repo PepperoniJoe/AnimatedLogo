@@ -26,8 +26,6 @@ class SplashGameScene: SKScene {
     private var squareCount   = 7
     private weak var timer1: Timer?
     private weak var timer2: Timer?
-        
-    //  override func didMove(to view: SKView) {}
     
     func start() {
         vcDelegate?.splash(isAnimationReady: false)
@@ -118,8 +116,10 @@ class SplashGameScene: SKScene {
     func exit() {
         steps = 0
         squareCount = 7
-        timer1?.invalidate()
-        timer2?.invalidate()
+        DispatchQueue.main.async {
+            self.timer1?.invalidate()
+            self.timer2?.invalidate()
+        }
     }
     
     func resetSplashBeforeExit() {
