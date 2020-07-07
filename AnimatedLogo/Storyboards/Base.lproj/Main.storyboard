@@ -39,9 +39,6 @@
                             <constraint firstItem="RF0-AG-fyU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ekx-wo-ftY"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="buttonRepeat" destination="RF0-AG-fyU" id="EbI-bp-z3w"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

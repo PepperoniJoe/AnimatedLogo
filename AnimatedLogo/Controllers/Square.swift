@@ -8,42 +8,60 @@
 
 import SpriteKit
 
-let squareSize: CGFloat = 40
-var colorScheme = 0
+let squareSize : CGFloat = 40
+var colorScheme          = 0
 
 class Square: SKNode {
-    private var sprite = SKShapeNode()
-    private var moves  : [CGPoint] = []
-    private let padding: CGFloat = 3.0
-    private var x = 0
-    private var y = 0
+    private var sprite              = SKShapeNode()
+    private var moves   : [CGPoint] = []
+    private let padding : CGFloat   = 3.0
+    private var x       : Int       = 0
+    private var y       : Int       = 0
+    
     
     init(x: Int, y: Int) {
         super.init()
+        
         self.x = x
         self.y = y
         
-        sprite = SKShapeNode(rectOf: CGSize(width: squareSize * K.sizeProportion, height: squareSize * K.sizeProportion))
+        addSprite()
+        recordPosition()
+    }
+    
+    
+    // MARK: Add Sprite
+    func addSprite() {
+        sprite = SKShapeNode(rectOf: CGSize(width: squareSize * K.sizeProportion,
+                                            height: squareSize * K.sizeProportion))
         
         let newColor: SKColor = K.colorArray[colorScheme][Int.random(in: 0...2)]
         sprite.fillColor   = newColor
-        sprite.strokeColor = newColor
+        sprite.strokeColor = .clear
         addChild(sprite)
-        
-        position = CGPoint(x: Double(x) * Double(squareSize) - Double(squareSize * padding),
-                           y: Double(y) * Double(squareSize) - Double(squareSize * padding))
+    }
+    
+    
+    // MARK: Record Positions of Sprite
+    func recordPosition() {
+        position = CGPoint(x: CGFloat(x) * squareSize - squareSize * padding,
+                           y: CGFloat(y) * squareSize - squareSize * padding)
         moves.append(position)
     }
     
-    func appear(_ rank: Int) {
-        let actionScale0 = SKAction.scale(to: 0, duration: 0)
-        let actionWait   = SKAction.wait(forDuration: 0.04 * Double(rank))
-        let actionScale1 = SKAction.scale(to: 1, duration: K.moveInterval)
-        let sequence     = SKAction.sequence([actionScale0, actionWait, actionScale1])
-        self.sprite.run(sequence)
+    
+    // MARK: Enlarge squares
+    func appear(_ rank: Double) {
+
+        sprite.run(SKAction.sequence([
+            SKAction.scale(to: 0, duration: 0),
+            SKAction.wait(forDuration: 0.04 * rank),
+            SKAction.scale(to: 1, duration: K.moveInterval)
+            ]))
     }
     
-    // MARK: ComeTogether
+    
+    // MARK: Record Path
     func scatter() {
         let direction = Direction.random()
         var test_x = 0
@@ -66,34 +84,28 @@ class Square: SKNode {
         if canMove == true {
             x = x + test_x
             y = y + test_y
-            position = CGPoint(x: Double(x) * Double(squareSize) - Double(squareSize * padding),
-                               y: Double(y) * Double(squareSize) - Double(squareSize * padding))
+            position = CGPoint(x: CGFloat(x) * squareSize - squareSize * padding,
+                               y: CGFloat(y) * squareSize - squareSize * padding)
         }
         moves.append(position)
     }
     
+    
     // MARK: ComeTogether
     func comeTogether() {
-        if moves.count < 1 { return }
-        let actionMove = SKAction.move(to: moves.last!, duration: K.moveInterval)
+        guard moves.count >= 1 else { return }
+        
+        var actionMove = SKAction()
+        
+        if let last = moves.last {
+            actionMove = SKAction.move(to: last, duration: K.moveInterval)
+        }
+        
         actionMove.timingMode = .easeInEaseOut
         run(actionMove)
         moves.removeLast()
     }
     
-    
-    // MARK: Directions
-    private enum Direction: Int {
-        case up
-        case down
-        case left
-        case right
-        
-        static func random() -> Direction {
-            let random = Int.random(in: 0...3)
-            return Direction(rawValue: random) ?? Direction.right
-        }
-    }
     
     // MARK: Default
     required init?(coder aDecoder: NSCoder) {

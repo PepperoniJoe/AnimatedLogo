@@ -5,40 +5,56 @@
 //  Created by Marcy Vernon on 3/8/19.
 //  Copyright © 2019 Marcy Vernon. All rights reserved.
 //
-
 import SpriteKit
 
 let squares = SKNode()
 let logo    = SKLabelNode(fontNamed: K.font)
 
-//MARK: Protocol to Hide Repeat Button
-protocol EndOfAnimation {
-    func splash(isAnimationReady: Bool)
-}
-
 class SplashGameScene: SKScene {
     
     var viewController: ViewController!
-    var vcDelegate: EndOfAnimation?
     
-    private let scatterLength = 10 //8
+    private let scatterLength = 10
     private var steps         = 0
     private var squareCount   = 7
-    private weak var timer1: Timer?
-    private weak var timer2: Timer?
+
     
     func start() {
-        vcDelegate?.splash(isAnimationReady: false)
         resetSplashBeforeExit()
         createLogo()
         createSquares()
-        setTimers()
+        fire()
     }
+    
+    var time = 12
+    
+    func fire() {
+
+        run(SKAction.sequence([
+            SKAction.run( appear ),
+            SKAction.wait(forDuration: 0.2)
+            ]))
+        
+         run(SKAction.repeatForever(
+            SKAction.sequence([
+            SKAction.run( organize ),
+            SKAction.wait(forDuration: 0.5)
+            ])))
+        
+        run(SKAction.repeat(
+            SKAction.sequence([
+            SKAction.wait( forDuration:0.1 ),
+            SKAction.run{ self.time -= 1 }]), count: 50
+        ))
+
+    }
+    
     
     private func createLogo() {
         logo.removeAllChildren()
-        let squareSpacing: CGFloat   = CGFloat(squareCount - 2)
-        logo.position                = CGPoint(x: self.frame.midX, y: self.frame.midY + (squareSize * squareSpacing))
+        let squareSpacing: CGFloat = CGFloat(squareCount - 2)
+        logo.position = CGPoint(x : self.frame.midX,
+                                y : self.frame.midY + (squareSize * squareSpacing))
         logo.horizontalAlignmentMode = .center
         logo.text                    = K.logoText
         logo.fontSize                = K.logoSize
@@ -74,27 +90,9 @@ class SplashGameScene: SKScene {
         for _ in (1...scatterLength) { scatter() }
     }
     
-    private func setTimers() {
-        DispatchQueue.main.async {
-            if self.timer1 == nil {
-                self.timer1 = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.appear), userInfo: nil, repeats: false)
-            }
-            DispatchQueue.main.async {
-                if self.timer2 == nil {
-                    self.timer2 = Timer.scheduledTimer(timeInterval: K.moveInterval, target: self, selector: #selector(self.organize), userInfo: nil, repeats: true)
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-                    self.vcDelegate?.splash(isAnimationReady: true)
-                }
-            }
-        }
-    }
-    
-    
-    
     @objc func appear() {
         squares.alpha = 1
-        var count = 1
+        var count: Double = 1
         for case let square as Square in squares.children {
             square.appear(count)
             count += 1
@@ -109,17 +107,13 @@ class SplashGameScene: SKScene {
             square.comeTogether()
         }
         
-        if steps == 8 { displayLogo() }  //10
-        if steps == 28 { exit() }  //14
+        if steps == 12 { displayLogo() }
+        if steps == 28 { exit() }
     }
     
     func exit() {
         steps = 0
         squareCount = 7
-        DispatchQueue.main.async {
-            self.timer1?.invalidate()
-            self.timer2?.invalidate()
-        }
     }
     
     func resetSplashBeforeExit() {
@@ -137,5 +131,4 @@ class SplashGameScene: SKScene {
     }
     
 } // end of SplashGameScene
-
 

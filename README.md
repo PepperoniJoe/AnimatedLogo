@@ -10,7 +10,7 @@ Experimenting with a 7x7 animated grid using Swift.
 
 **Technical Info:** \
 Xcode12  project written in Swift 5.3 for iOS 14\
-SpriteKit, UIKit
+SpriteKit, SKScene, SKView, SKActions, SKLabelNode, SKNode
 
 **Author:** \
 Marcy Vernon [@MarcyVernon](https://twitter.com/MarcyVernon)

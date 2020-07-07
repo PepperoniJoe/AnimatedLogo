@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: Reusable Alert for view controllers
 extension UIViewController {
     func presentAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

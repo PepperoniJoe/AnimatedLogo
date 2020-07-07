@@ -10,43 +10,37 @@ import SpriteKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var buttonRepeat: UIButton!
+    private let scene     = SplashGameScene(fileNamed : K.scene)!
+    private let skView    = SKView()
     
-    private let scene  = SplashGameScene(fileNamed : K.scene)!
-    private let skView = SKView()
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttonRepeat.isHidden = true
         splashLoad()
     }
     
+    
+    //MARK: Load the scene
     private func splashLoad() {
         if let scene = SplashGameScene(fileNamed: K.scene) {
             let skView = self.view as! SKView
             scene.viewController = self
             scene.scaleMode      = .aspectFill
             skView.presentScene(scene)
-            scene.vcDelegate = self
             scene.start()
         }
     }
     
+    
+    //MARK: Rerun the animation
     @IBAction func repeatScene(_ sender: Any) {
         scene.resetSplashBeforeExit()
         splashLoad()
     }
+    
     
     override func didReceiveMemoryWarning() {
         presentAlert(title: K.lowMemory, message: K.lowMemoryWarning)
     }
 }  // end of ViewController
 
-extension ViewController: EndOfAnimation {
-    func splash(isAnimationReady: Bool) {
-        buttonRepeat.isHidden =  !isAnimationReady
-    }
-    
-    
-}
+
